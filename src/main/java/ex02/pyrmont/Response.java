@@ -35,6 +35,7 @@ public class Response implements ServletResponse {
 		try {
 			File file = new File(Constants.WEB_ROOT, request.getUri());
 			if (file.exists()) {
+                sendHeader();
 				fis = new FileInputStream(file);
 				int ch = fis.read(bytes, 0, BUFFER_SIZE);
 				while (ch != -1) {
@@ -53,6 +54,15 @@ public class Response implements ServletResponse {
 			}
 		}
 	}
+
+	public void sendHeader() {
+        String cacheHeader = "HTTP/1.1 200 OK\r\n\r\n";
+        try {
+            outputStream.write(cacheHeader.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 	@Override
 	public String getCharacterEncoding() {
