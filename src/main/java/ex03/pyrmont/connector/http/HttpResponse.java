@@ -88,8 +88,12 @@ public class HttpResponse implements HttpServletResponse {
    * call this method to send headers and response to the output
    */
   public void finishResponse() {
-    // sendHeaders();
-    // Flush and close the appropriate output mechanism
+      try {
+          sendHeaders();
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+      // Flush and close the appropriate output mechanism
     if (writer != null) {
       writer.flush();
       writer.close();

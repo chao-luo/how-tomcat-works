@@ -27,7 +27,7 @@ public class PrimitiveServlet implements Servlet {
 	@Override
 	public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
 		System.out.println("service method is invoked!!!");
-
+        ((Response)servletResponse).sendOKHeader();
 		PrintWriter out = servletResponse.getWriter();
 		out.println("Hello. Roses are red.");
 		out.print("Violets are blue");
